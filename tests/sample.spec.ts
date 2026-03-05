@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import * as allure from 'allure-js-commons';
 
 test.describe('Sample test to see allure report', () => {
 
@@ -11,6 +12,8 @@ test.describe('Sample test to see allure report', () => {
         });
     })
     test('The internet login form test - Wrong password', async ({ page }) => {
+        await allure.feature('UI Login form');
+        await allure.story('Login with wrong password');
         await test.step('Fill out login form', async () => {
             const usernameField = page.getByRole('textbox', { name: 'username' });
             const passwordField = page.getByRole('textbox', { name: 'password' });
@@ -26,6 +29,8 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Empty input', async ({ page }) => {
+        await allure.feature('UI Login form');
+        await allure.story('Login with empty inputs');
         await test.step('Fill out login form', async () => {
             const usernameField = page.getByRole('textbox', { name: 'username' });
             const passwordField = page.getByRole('textbox', { name: 'password' });
@@ -41,6 +46,8 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Happy path', async ({ page }) => {
+        await allure.feature('UI Login form');
+        await allure.story('Login with correct credentials');
         await test.step('Fill out login form', async () => {
             const usernameField = page.getByRole('textbox', { name: 'username' });
             const passwordField = page.getByRole('textbox', { name: 'password' });
@@ -56,6 +63,7 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Fail on purpose', async ({ page }) => {
+        await allure.feature('UI Login form');
         await test.step('Fill out login form', async () => {
             const usernameField = page.getByRole('textbox', { name: 'username' });
             const passwordField = page.getByRole('textbox', { name: 'password' });
@@ -70,9 +78,12 @@ test.describe('Sample test to see allure report', () => {
         });
     });
 
-    test.skip('Skipped test', async () => {});
+    test.skip('Skipped test', async () => {
+        await allure.feature('UI Login form');
+    });
 
     test('The internet login form test - Broken status on purpose', async ({ page }) => {
+        await allure.feature('UI Login form');
         await test.step('Fill out login form', async () => {
             // Purposefully wrong locators
             const usernameField = page.locator('#falseElement');
