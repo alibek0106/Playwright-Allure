@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Sample test to see allure report', async () => {
+test.describe('Sample test to see allure report', () => {
 
     test.beforeEach('Navigation', async ({ page }) => {
         await test.step('Navigation to login form', async () => {
@@ -71,4 +71,20 @@ test.describe('Sample test to see allure report', async () => {
     });
 
     test.skip('Skipped test', async () => {});
+
+    test('The internet login form test - Broken status on purpose', async ({ page }) => {
+        await test.step('Fill out login form', async () => {
+            // Purposefully wrong locators
+            const usernameField = page.locator('#falseElement');
+            const passwordField = page.locator('#falseElement');
+            await usernameField.fill('');
+            await passwordField.fill('');
+            await page.getByRole('button', { name: 'Login' }).click();
+        });
+
+        await test.step('Verify login message', async () => {
+            const flashMessage = page.locator('#flash');
+            await expect(flashMessage).toContainText('Your username is invalid!');
+        });
+    });
 });
