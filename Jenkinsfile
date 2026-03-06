@@ -21,7 +21,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat returnStatus: true, script: 'npx playwright test --workers=4'
+                bat 'npx playwright test --workers=4 || exit 0'
             }
         }
     }
