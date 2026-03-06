@@ -63,6 +63,7 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Fail on purpose', async ({ page }) => {
+        test.fail();
         await allure.feature('UI Login form');
         await test.step('Fill out login form', async () => {
             const usernameField = page.getByRole('textbox', { name: 'username' });
@@ -83,6 +84,7 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Broken status on purpose', async ({ page }) => {
+        test.fail();
         await allure.feature('UI Login form');
         await test.step('Fill out login form', async () => {
             // Purposefully wrong locators
