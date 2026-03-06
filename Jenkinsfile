@@ -21,9 +21,7 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS') {
-                    bat 'npx playwright test --workers=4'
-                }
+                bat returnStatus: true, script: 'npx playwright test --workers=4'
             }
         }
     }

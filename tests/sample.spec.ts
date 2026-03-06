@@ -84,7 +84,7 @@ test.describe('Sample test to see allure report', () => {
     });
 
     test('The internet login form test - Broken status on purpose', async ({ page }) => {
-        test.fail();
+        test.setTimeout(2000);
         await allure.feature('UI Login form');
         await test.step('Fill out login form', async () => {
             // Purposefully wrong locators
