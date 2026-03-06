@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'BROWSER', choices: ['chromium', 'firefox', 'webkit'], description: 'Select the browser')
+        string(name: 'TARGET_ENV', defaultValue: 'staging', description: 'Environment to test')
+    }
+
     tools {
         nodejs 'NodeJS'
     }
@@ -21,7 +26,8 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                bat 'npx playwright test --workers=4 || exit 0'
+                echo "Running tests on ${params.TARGET_ENV} using ${params.BROWSER}"
+                bat "set TARGET_ENV=${params.TARGET_ENV} && npx playwright test --project=${params.BROWSER} --workers=4 "
             }
         }
     }
